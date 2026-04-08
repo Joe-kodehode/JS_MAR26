@@ -1,180 +1,60 @@
-// Lesson 4: Functions in JavaScript
+// Lesson 5: Javascript Methods
 
-// A function is a block of code designed to do one specific task. It lets you write code once and reuse it, keeping your program clean and organized. However, the function won't do anything until you call it.
+// A method in JavaScript is a built-in function that you use with a specific type of data, like strings, numbers or arrays. It lets you do something with that data—like change it, check it, copy or access part of it.
 
-// ---------------------------------------------------
-// Section 1: Function Declarations (aka function statements) and Hoisting
-// ---------------------------------------------------
+// Section 1.1: String Methods
 
-// A regular function, can be called before it's creation, due to hoisting
+const text = "   Hello, JavaScript World World!   ";
 
-function sayHello() {
-  // Code that we want to run when we call the function goes here, between the curly brackets!
-  console.log("Hello World!");
-}
+console.log(text.trim()); // removes whitespace from both ends of a string (does not alter the original)
+console.log(text.toUpperCase()); // converts the string to uppercase
+console.log(text.toLowerCase()); // converts the string to lowercase
+console.log(text.indexOf("JavaScript")); // returns the starting index of a word or character in a string.
+console.log(text.slice(3, 8)); // extracts characters from index 3 to 8, the start is included, the end is excluded. Does not alter the original.
+console.log(text.replace("World", "Universe")); // replaces the first instance of the word "World" with "Universe"
+console.log(text.replaceAll("World", "Universe")); // replaces ALL instances of the word "World" with "Universe"
+console.log(text.charCodeAt(3)); // returns the unicode value of the character at the given index
+console.log(text.repeat(3));
+console.log(text.length); // returns the length of the string
 
-// Function call
-sayHello();
+// Section 1.2: Converting a string into an array
+console.log(text.trim().split(" ")); // splits the string into an array of substrings by spaces
 
-// ---------------------------------------------------
-// Section 2: Arrow Functions (introduced in ES6, great for short, inline functions)
-// ---------------------------------------------------
+// Section 1.3: Converting a String to a Number
+let numericString = "123.45xyz";
 
-// An arrow function expression. Can't use hoisting.
-const arrowExample = () => {
-  console.log("Hello from the arrow function!");
-};
+console.log(Number(numericString)); // converts entire string into a number, returns NaN if there is text in the string
+console.log(parseFloat(numericString)); // converts entire string into a number, even if there is text - the text is removed.
+console.log(parseInt(numericString)); // converts the Int into a number but does not include decimal, even if there is text - the text is removed.
 
-// Calling the arrow function
-arrowExample();
+// ----------------
+// Section 2.1: Array Methods
+// ----------------
 
-// ---------------------------------------------------
-// Section 3: Return Statements and Scope
-// ---------------------------------------------------
+const colors = ["Red", "Green", "Blue"];
 
-function returnExample() {
-  const myMessage = "This function returns this string";
-  return myMessage;
-}
+console.log(colors.length); // returns the number of elements in the array
 
-const returnedData = returnExample();
-console.log(returnedData);
+colors.push("Yellow");
+console.log(colors); // adds yellow to the end of the array, alters the original
 
-// ---------------------------------------------------
-// Section 4: Functions with Parameters
-// ---------------------------------------------------
+colors.pop();
+console.log(colors); // removes the last element in the array, alters the original
+// const lastColor = colors.pop();
+// console.log(lastColor);
 
-// Example 1 - Hard Coding
+console.log(colors.shift()); // removes the first element in the array, alters the original
 
-function add() {
-  return 3 + 4;
-}
+colors.unshift("Purple");
+console.log(colors); // adds purple to the beginning of the array, alters the original
 
-console.log(add());
+console.log(colors.includes("Purple")); // returns true or false if the given data is an element in the array
 
-// Example 2 - Soft coding (dynamic)
+const newColors = colors.toSpliced(2, 1, "Orange", "Pink");
+console.log(newColors); // Removes elements from the array. (start index, amount removed, replaced by). Does NOT alter the original!
 
-function minus(num1, num2) {
-  return num1 - num2;
-}
+colors.splice(2, 1, "Orange", "Pink");
+console.log(colors); // Does the same as toSpliced but DOES alter the original!
 
-console.log(minus(100, 50));
-console.log(minus(30, 1));
-const returnedNum = minus(67, 43);
-
-let multipliedNum = returnedNum * 2;
-
-console.log(multipliedNum);
-
-// Example 3
-// Greeter function that uses parameters and template literals.
-
-// Static or Dynamic?
-
-const greeter = (time, name) => {
-  return "Good" + " " + time + " " + name;
-};
-
-console.log(greeter("Morning", "Joe"));
-console.log(greeter("Evening", "Bob"));
-
-//Improved with Template literal
-const greeter2 = (time, name) => {
-  return `Good ${time} ${name}`;
-};
-
-console.log(greeter2("Morning", "Joe"));
-console.log(greeter2("Evening", "Bob"));
-
-// ---------------------------------------------------
-// Section 5: Implicit Return in Arrow Functions
-// ---------------------------------------------------
-
-// Standard Arrow Function
-// const adder = (num1, num2) => {
-//   return num1 + num2;
-// };
-
-// console.log(adder(10, 15));
-
-// Same function with an implicit return
-const adder = (num1, num2) => num1 + num2;
-console.log(adder(10, 15));
-
-// ---------------------------------------------------
-// Section 6: Calculator Function Using Switch Statement
-// ---------------------------------------------------
-
-function calculator(num1, num2, operator) {
-  switch (operator) {
-    case "+":
-      return num1 + num2;
-    case "-":
-      return num1 - num2;
-    case "*":
-      return num1 * num2;
-    case "/":
-      return num1 / num2;
-    default:
-      return "Error, Invalid Operator";
-  }
-}
-
-console.log(calculator(5, 1, "+"));
-console.log(calculator(100, 2, "/"));
-console.log(calculator(345, 22, "hello"));
-
-// ---------------------------------------------------
-// Section 7: Updating a Global Variable via a Function
-// ---------------------------------------------------
-
-// We're making a game and updating the players hp
-
-let hp = 100;
-
-const updateHp = (change, amount) => {
-  if (change === "up") {
-    hp += amount;
-    if (hp > 200) hp = 200;
-  } else if (change === "down") {
-    hp -= amount;
-    if (hp <= 0) {
-      console.log("You died, try again!");
-      hp = 100;
-    }
-  }
-};
-
-updateHp("down", 10);
-console.log(hp);
-updateHp("down", 50);
-console.log(hp);
-updateHp("down", 100);
-console.log(hp);
-updateHp("down", 100);
-console.log(hp);
-
-// 1) it's always 10hp - FIXED
-// 2) my character has a max health of 200
-// 3) my character should die and reset to 200 at 0 hp
-
-// ---------------------------------------------------
-// Section 8: Using Template Literals and Ternary Operator in a Function
-// ---------------------------------------------------
-
-const fruits = ["Banana", "Apple", "Pear", "Kiwi"];
-
-const checkFruit = (fruit) => {
-  let included;
-  if (fruits.includes(fruit)) {
-    included = "does";
-  } else {
-    included = "doesn't";
-  }
-
-  return `The array ${included} include ${fruit}`;
-};
-
-console.log(checkFruit("Pear"));
-console.log(checkFruit("Apple"));
-console.log(checkFruit("Grapes"));
+// 2.2: turning an array into a string
+console.log(colors.join(" "));
