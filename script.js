@@ -1,171 +1,226 @@
-// Lesson 8: Objects
+// Lesson 9: Loops & Objects Recap
 
-// Section 1: What is an Object?
+// Section 1: Looping through arrays
 
-// An object is a datatype that stores related data using key-value pairs.
+const fruitNames = ["Apple", "Banana", "Mango", "Grapes", "Pear"];
 
-const person = {
-  name: "Alice",
-  age: 28,
-  job: "Designer",
-};
+console.log(fruitNames.length);
 
-console.log(person); // log the entire object
-console.log(person.age); // access with dot notation
-console.log(person["age"]); // access with bracket notation
+// the 'for' loop allows the possibility to change starting index, when we end the loop and how we increment the loop.
 
-// Dot vs bracket:
-// You can use dot notation when you know the key name at the code time : person.name
-
-// Use bracket notation when the key is dynamic or not a valid identifier: person[key]
-
-// Section 2: Creating, Modifying and Deleting Object Keys/Values
-
-person.country = "Norway"; // add new key/value
-person.age = 29; // updating an existing key/value
-delete person.country; // remove an existing key
-console.log(person);
-
-// Section 3: Looping though an Object using 'for in' loop
-
-const user = {
-  name: "Joe",
-  age: 38,
-  location: "Stavanger",
-  hobbies: "Gaming",
-};
-
-// a "for in" loop is similar to a "for of" loop. But it loops over an object and targets the keys.
-for (let key in user) {
-  console.log(key); // key will store a different key each loop, the loop will go over the entire object.
-  console.log(user[key]); // Dynamic key access
+for (let i = 0; i < fruitNames.length; i++) {
+  console.log(fruitNames[i]);
 }
 
-// Dynamic key access is useful when you don't know the property name (key name) in advance, like when looping through an object.
+//the 'for of' loop, loops over ALL elements in an array. Does not have access to start/end/increment like a regular for loop does.
 
-// Section 4: Nested Objects and Arrays
+for (let fruit of fruitNames) {
+  console.log(fruit);
+}
 
-const userData = {
-  firstName: "Olav",
-  lastName: "Hansen",
-  age: 31,
-  isMale: true,
-  hobbies: ["Golf", "Hiking", "Cinema"],
-  address: {
-    streetName: "Solskinnsgaten",
-    streetNumber: 39,
-    postCode: 4050,
-  },
+// Section 2: Looping with Conditions
+
+const numbers = [12, 5, 8, 130, 44, 3, 22];
+
+for (number of numbers) {
+  if (number < 10) continue;
+  if (number > 100) break;
+
+  console.log(number);
+}
+
+// Section 3: The While Loop (Guessing Game)
+
+// random number between 1-10
+
+// 0.000000000 - 0.999999999
+let guess = 0;
+let randomNumber = Math.floor(Math.random() * 10) + 1;
+
+console.log(randomNumber);
+
+while (guess !== randomNumber) {
+  guess++;
+  console.log(`Guessing: ${guess}`);
+  if (guess === randomNumber) {
+    console.log(
+      `Congratulations, you guessed correctly! The number was: ${guess}`,
+    );
+  }
+}
+
+// Section 4: Basic Objects
+
+// Key value pairs
+
+const book = {
+  title: "The Hobbit",
+  author: "J.R.R. Tolkien",
+  pages: 310,
 };
+console.log(book);
 
-console.log(userData.address.postCode);
+// Adding a new key value pair to an existing object
+// published in 1937
+book.published = 1937;
 
-// Section 5: Array of Obects (object arrays)
+// Update pages to 320
+book.pages = 320;
+// Update pages to add 10
+book.pages += 10;
 
-const products = [
+console.log(book);
+
+// dot notation and bracket notation
+console.log(book.title);
+
+// Bracket notation can be useful when you don't know the key / are looping over the object with a 'for in' loop.
+console.log(book["title"]);
+console.log(book["author"]);
+console.log(book["pages"]);
+
+// Section 5: Looping through an Object using dynamic keys.
+
+for (let key in book) {
+  console.log(key);
+  console.log(book[key]);
+}
+
+// Section 6: Array of Objects (Object array)
+
+const fruits = [
   {
-    productName: "Shirt",
-    productId: 56,
-    stock: 5,
+    name: "Apple",
+    color: "Red",
+    calories: 52,
+    pricePerKg: 3.5,
+    countryOfOrigin: "USA",
   },
   {
-    productName: "Pants",
-    productId: 3,
-    stock: 0,
+    name: "Banana",
+    color: "Yellow",
+    calories: 89,
+    pricePerKg: 1.2,
+    countryOfOrigin: "Ecuador",
   },
   {
-    productName: "Socks",
-    productId: 99,
-    stock: 658,
+    name: "Orange",
+    color: "Orange",
+    calories: 47,
+    pricePerKg: 2.8,
+    countryOfOrigin: "Spain",
+  },
+  {
+    name: "Strawberry",
+    color: "Red",
+    calories: 32,
+    pricePerKg: 6.0,
+    countryOfOrigin: "Mexico",
+  },
+  {
+    name: "Mango",
+    color: "Orange",
+    calories: 60,
+    pricePerKg: 4.0,
+    countryOfOrigin: "India",
+  },
+  {
+    name: "Grapes",
+    color: "Green",
+    calories: 69,
+    pricePerKg: 1,
+    countryOfOrigin: "Italy",
+  },
+  {
+    name: "Pineapple",
+    color: "Brown",
+    calories: 50,
+    pricePerKg: 3.0,
+    countryOfOrigin: "Costa Rica",
   },
 ];
 
-console.log(products[2]);
+// Describe each fruit using a loop.
 
-// We can loop over our array of objects and create a dynamic message for our user displaying the name, id and stock of each product.
-for (let product of products) {
+// What type of loop shall we use?
+
+for (let fruit of fruits) {
   console.log(
-    `${product.productName}, ID number: ${product.productId}, has ${product.stock} left in stock`,
+    `${fruit.name} is a ${fruit.color} fruit, from ${fruit.countryOfOrigin}.`,
   );
+  // console.log(fruit.name);
+  // console.log(fruit.color);
+  // console.log(fruit.countryOfOrigin);
 }
 
-// Section 6: Descriptive Sentences with Objects
+// Apple is a red fruit from USA.
+// Banana is a yellow fruit from Ecuador.
 
-const people = [
-  {
-    name: "Thomas",
-    isMale: true,
-    age: 23,
-    hobbies: ["cycling", "football", "pool"],
-  },
-  {
-    name: "Susan",
-    isMale: false,
-    age: 26,
-    hobbies: ["jogging", "travelling", "dancing"],
-  },
-  {
-    name: "Monica",
-    isMale: false,
-    age: 21,
-    hobbies: ["skateboarding", "guitar", "concerts", "latte and hot chocolate"],
-  },
-  {
-    name: "Avery",
-    isMale: true,
-    age: 28,
-    hobbies: ["coding", "games", "memes", "annoying joe"],
-  },
-  {
-    name: "Phillip",
-    isMale: true,
-    age: 24,
-    hobbies: [
-      "boxing",
-      "wrestling",
-      "mma",
-      "eating loads of cake",
-      "programming",
-    ],
-  },
-  {
-    name: "Otto",
-    isMale: true,
-    age: 36,
-    hobbies: ["movies", "cinema", "music", "Warhammer"],
-  },
-  {
-    name: "Annabelle",
-    isMale: false,
-    age: 30,
-    hobbies: ["makeup", "fashion", "shopping"],
-  },
-  {
-    name: "Cathy",
-    isMale: false,
-    age: 18,
-    hobbies: ["design", "drawing"],
-  },
-];
+// Section 7: Find the cheapest fruit
 
-// Let's write a 'for of' loop which console.log the persons name, age, if they are a man or woman, a random hobby.
+// DRY - Don't repeat yourself - USE A LOOP!
 
-// For example: "Cathy is an 18 year old woman who enjoys drawing"
+let cheapest = Infinity;
+let fruitName;
 
-for (let person of people) {
-  // let maleOrFemale;
+// if (fruits[0].pricePerKg < cheapest) {
+//   cheapest = fruits[0].pricePerKg;
+// }
+// if (fruits[1].pricePerKg < cheapest) {
+//   cheapest = fruits[1].pricePerKg;
+// }
+// if (fruits[2].pricePerKg < cheapest) {
+//   cheapest = fruits[2].pricePerKg;
+// }
+// if (fruits[3].pricePerKg < cheapest) {
+//   cheapest = fruits[3].pricePerKg;
+// }
+// if (fruits[4].pricePerKg < cheapest) {
+//   cheapest = fruits[4].pricePerKg;
+// }
+// if (fruits[5].pricePerKg < cheapest) {
+//   cheapest = fruits[5].pricePerKg;
+// }
+// if (fruits[6].pricePerKg < cheapest) {
+//   cheapest = fruits[6].pricePerKg;
+// }
 
-  // if (person.isMale === true) {
-  //   maleOrFemale = "man";
-  // } else {
-  //   maleOrFemale = "woman";
-  // }
-
-  let pronoun = person.isMale ? "man" : "woman";
-  // Creating a random number between 0-2
-  let ranNum = Math.floor(Math.random() * person.hobbies.length);
-
-  console.log(
-    `${person.name} is ${person.age} years old, a ${pronoun} who enjoys ${person.hobbies[ranNum]}`,
-  );
+for (let fruit of fruits) {
+  if (fruit.pricePerKg < cheapest) {
+    cheapest = fruit.pricePerKg;
+    fruitName = fruit.name;
+  }
 }
+
+console.log(
+  `The cheapest fruit is: ${fruitName} with a price of ${cheapest}kr per kg`,
+);
+
+// Section 8: Adding and Removing properties in a Loop
+
+// Add a "good" property to every fruit
+for (let fruit of fruits) {
+  fruit.good = true;
+  delete fruit.good;
+}
+
+console.log(fruits);
+
+// Section 9: Object inside a Function
+
+function describeFruit(fruit) {
+  return `${fruit.name} contains ${fruit.calories} calories per 100g and costs ${fruit.pricePerKg} kr. per kg`;
+}
+
+console.log(describeFruit(fruits[0]));
+console.log(describeFruit(fruits[4]));
+
+// Summary
+
+// ✅ Use loops to repeat tasks or go through arrays and objects.
+// ✅ for...of is great for typical arrays;
+// ✅ for...in is used for object keys.
+// ✅ Objects store data in key-value pairs.
+// ✅ Arrays can contain multiple objects. (Object arrays)
+// ✅ Loops can combine with logic, conditions, and functions.
+// ✅ You can add, modify, or delete properties dynamically.
