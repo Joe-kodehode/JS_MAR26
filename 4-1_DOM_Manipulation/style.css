@@ -1,0 +1,19 @@
+.underline {
+  text-decoration: underline;
+}
+
+.list-item {
+  color: purple;
+}
+
+.box {
+  width: 200px;
+  height: 200px;
+  background-color: bisque;
+  border: 1px solid black;
+}
+
+.dark {
+  background-color: darkslategrey;
+  border: 1px solid lightskyblue;
+}
