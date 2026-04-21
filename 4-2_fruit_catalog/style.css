@@ -1,0 +1,72 @@
+/* Base page styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 20px;
+  font-size: 32px;
+  color: #333;
+}
+
+/* Container for the fruit cards */
+.fruit-catalog {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px;
+}
+
+/* Individual fruit card */
+.fruit-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  width: 200px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.fruit-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+/* Fruit image style */
+.fruit-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.fruit-name {
+  margin: 0;
+  font-size: 20px;
+  color: #222;
+}
+
+.fruit-info,
+.fruit-nutrition,
+.fruit-price {
+  font-size: 14px;
+  margin: 6px 0;
+  color: #555;
+}
+
+.sale-price {
+  color: white;
+  background-color: red;
+  border-radius: 10px;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+  color: lightslategray;
+}
